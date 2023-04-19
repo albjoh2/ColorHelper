@@ -1,12 +1,12 @@
 import TextComponent from "./TextComponent";
 
 interface CanvasProps {
-  color: string;
-  textcolor: string;
+  color: object | any;
   text: string;
 }
 
 export default function Canvas(props: CanvasProps) {
+  const text = props.text;
   return (
     <>
       <div
@@ -17,10 +17,10 @@ export default function Canvas(props: CanvasProps) {
           textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: props.color,
+          backgroundColor: `rgb(${props.color.background.red}, ${props.color.background.green}, ${props.color.background.blue})`,
         }}
       >
-        <TextComponent text={props.text} textcolor={props.textcolor} />
+        <TextComponent text={text} textcolor={props.color.text} />
       </div>
     </>
   );

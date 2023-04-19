@@ -1,40 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 interface CanvasProps {
-  color: string;
-  textcolor: string;
+  color: object | any;
   text: string;
 }
 
 export default function TrainingForm(props: CanvasProps) {
-  const colorRed = props.color.split("(")[1].split(",")[0].trim();
-  const colorGreen = props.color.split("(")[1].split(",")[1].trim();
-  const colorBlue = props.color
-    .split("(")[1]
-    .split(",")[2]
-    .split(")")[0]
-    .trim();
-  const textColorRed = props.textcolor.split("(")[1].split(",")[0].trim();
-  const textColorGreen = props.textcolor.split("(")[1].split(",")[1].trim();
-  const textColorBlue = props.textcolor
-    .split("(")[1]
-    .split(",")[2]
-    .split(")")[0]
-    .trim();
+  const [colorRed, setColorRed] = useState(props.color.background.red);
+  const [colorGreen, setColorGreen] = useState(props.color.background.green);
+  const [colorBlue, setColorBlue] = useState(props.color.background.blue);
+  const [textColorRed, setTextColorRed] = useState(props.color.text.red);
+  const [textColorGreen, setTextColorGreen] = useState(props.color.text.green);
+  const [textColorBlue, setTextColorBlue] = useState(props.color.text.blue);
+
   const [easyToRead, setEasyToRead] = useState(0.5);
   const [beauty, setBeauty] = useState(0.5);
   const router = useRouter();
-  console.log(
-    colorRed,
-    colorGreen,
-    colorBlue,
-    textColorRed,
-    textColorGreen,
-    textColorBlue
-  );
+
+  useEffect(() => {
+    setColorRed(props.color.background.red);
+    setColorGreen(props.color.background.green);
+    setColorBlue(props.color.background.blue);
+    setTextColorRed(props.color.text.red);
+    setTextColorGreen(props.color.text.green);
+    setTextColorBlue(props.color.text.blue);
+  }, [props.color]);
 
   const handleSubmit = async () => {
     await fetch("http://127.0.0.1:8090/api/collections/dataPoint/records", {
@@ -72,6 +65,7 @@ export default function TrainingForm(props: CanvasProps) {
         }}
         onSubmit={handleSubmit}
       >
+        <h3>What do you think?</h3>
         <label>
           Easy to read?
           <input
