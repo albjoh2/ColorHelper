@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ScoreContainer from "./components/ScoreContainer";
 import * as brain from "brain.js";
-import { time } from "console";
+import Loading from "./components/Loading";
 
 const config = {
   binaryThresh: 0.5,
@@ -33,12 +33,6 @@ export default function Home() {
   });
 
   const [isNetTrained, setIsNetTrained] = useState(false);
-
-  useEffect(() => {
-    trainNeuralNet(setNet, net).then(() => {
-      setIsNetTrained(true);
-    });
-  }, []);
 
   useEffect(() => {
     if (isNetTrained) {
@@ -88,9 +82,15 @@ export default function Home() {
       text: bestText,
     });
   };
+  useEffect(() => {
+    trainNeuralNet(setNet, net).then(() => {
+      setIsNetTrained(true);
+    });
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
+      {!isNetTrained && <Loading />}
       <Header {...canvasProps} setCanvasProps={setCanvasProps} />
       <div className="relative lg:flex md:flex place-items-center gap-10 m-5">
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
