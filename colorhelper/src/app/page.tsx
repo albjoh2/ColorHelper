@@ -1,13 +1,12 @@
 "use client";
 
-import Image from "next/image";
-import { Inter } from "next/font/google";
 import Canvas from "./components/Canvas";
 import * as brain from "brain.js";
 import RandomButton from "./components/RandomButton";
 import TrainingForm from "./components/TrainingForm";
 import ScoreComponent from "./components/ScoreComponent";
 import { useState, useEffect } from "react";
+import Header from "./components/Header";
 
 let textColorRed: number = 0,
   textColorGreen: number = 0,
@@ -78,8 +77,6 @@ async function brainFunction(
   );
 }
 
-const inter = Inter({ subsets: ["latin"] });
-
 //generate random color
 function getRandomColor(type: string) {
   if (type === "text") {
@@ -120,30 +117,7 @@ export default function Home() {
   };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/LogoDark.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={150}
-              height={36}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
+      <Header />
       <div className="relative flex place-items-center gap-10 m-5">
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <Canvas {...canvasProps} />
@@ -161,21 +135,18 @@ export default function Home() {
           title="Accessibility Score"
           description="A score based on the AI-models score of color contrast between text and
           background."
-          font={inter.className}
         />
 
         <ScoreComponent
           score={beautyScore}
           title="Beauty Score"
           description="A score based on how well the model thinks the colors goes together."
-          font={inter.className}
         />
 
         <ScoreComponent
           score={totalScore}
           title="Total Score"
           description="This score tells you what the model thinks of the design as a whole."
-          font={inter.className}
         />
       </div>
     </main>
