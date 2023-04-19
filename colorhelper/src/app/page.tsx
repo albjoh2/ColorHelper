@@ -9,6 +9,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ScoreContainer from "./components/ScoreContainer";
 import * as brain from "brain.js";
+import { time } from "console";
 
 const config = {
   binaryThresh: 0.5,
@@ -59,15 +60,49 @@ export default function Home() {
     });
   };
 
+  const findAGoodOne = () => {
+    let bestScore = 0;
+    let bestColor = {
+      background: { red: 0, green: 0, blue: 0 },
+      text: { red: 0, green: 0, blue: 0 },
+    };
+    let bestText = "";
+    for (let i = 0; i < 1000; i++) {
+      let color = getRandomColor({
+        background: { red: 0, green: 0, blue: 0 },
+        text: { red: 0, green: 0, blue: 0 },
+      });
+      let data = getNeuralNetOutputs(net, {
+        color: color,
+        text: canvasProps.text,
+      });
+      let score = (data.accessibilityScore + data.beautyScore) / 2;
+      if (score > bestScore) {
+        bestScore = score;
+        bestColor = color;
+        bestText = canvasProps.text;
+      }
+    }
+    setCanvasProps({
+      color: bestColor,
+      text: bestText,
+    });
+  };
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       <Header {...canvasProps} setCanvasProps={setCanvasProps} />
-      <div className="relative flex place-items-center gap-10 m-5">
+      <div className="relative lg:flex md:flex place-items-center gap-10 m-5">
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <Canvas {...canvasProps} />
-          <RandomButton handleRandomize={handleRandomize} />
+          <div>
+            <button onClick={findAGoodOne}>Give me something nice</button>
+            <RandomButton handleRandomize={handleRandomize} />
+          </div>
         </div>
-        <TrainingForm {...canvasProps} />
+        <div className="w-full flex justify-center sm:mt-10">
+          <TrainingForm {...canvasProps} />
+        </div>
       </div>
 
       <ScoreContainer
