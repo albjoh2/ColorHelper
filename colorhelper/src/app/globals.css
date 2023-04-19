@@ -32,3 +32,8 @@ label {
   align-items: center;
   justify-content: space-between;
 }
+
+h3 {
+  margin-bottom: 20px;
+  font-size: 20px;
+}

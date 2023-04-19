@@ -6,6 +6,7 @@ import Canvas from "./components/Canvas";
 import * as brain from "brain.js";
 import RandomButton from "./components/RandomButton";
 import TrainingForm from "./components/TrainingForm";
+import ScoreComponent from "./components/ScoreComponent";
 import { useState, useEffect } from "react";
 
 let textColorRed: number = 0,
@@ -148,53 +149,34 @@ export default function Home() {
           <Canvas {...canvasProps} />
           <RandomButton handleRandomize={handleRandomize} />
         </div>
-        <TrainingForm {...canvasProps} />
+        <div>
+          <h3>What do you think?</h3>
+          <TrainingForm {...canvasProps} />
+        </div>
       </div>
 
       <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-3 lg:text-left">
-        <div className="m-5">
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Accesability Score{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt; {accessibilityScore.toFixed(2)}%
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            A score based on the AI-models view of color contrast taking the
-            font size in to account
-          </p>
-        </div>
+        <ScoreComponent
+          score={accessibilityScore}
+          title="Accessibility Score"
+          description="A score based on the AI-models score of color contrast between text and
+          background."
+          font={inter.className}
+        />
 
-        <div className="m-5">
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Beauty Score{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt; {beautyScore.toFixed(2)}%
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            A subjective score based on the models view of the colors together
-            with the font.
-          </p>
-        </div>
+        <ScoreComponent
+          score={beautyScore}
+          title="Beauty Score"
+          description="A score based on how well the model thinks the colors goes together."
+          font={inter.className}
+        />
 
-        <div className="m-5">
-          <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
-            Total Score{" "}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt; {totalScore}%
-            </span>
-          </h2>
-          <p
-            className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}
-          >
-            This score tells you what the model thinks of the design as a whole.
-          </p>
-        </div>
+        <ScoreComponent
+          score={totalScore}
+          title="Total Score"
+          description="This score tells you what the model thinks of the design as a whole."
+          font={inter.className}
+        />
       </div>
     </main>
   );
