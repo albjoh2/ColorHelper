@@ -66,30 +66,40 @@ export default function TrainingForm(props: CanvasProps) {
         onSubmit={handleSubmit}
       >
         <h3>What do you think?</h3>
-        <label>
-          Easy to read?
-          <input
-            type="range"
-            defaultValue={easyToRead}
-            onChange={(e) => setEasyToRead(+e.target.value)}
-            min={0}
-            max={0.9999999}
-            step={0.01}
-            name="easyToRead"
-          />
-        </label>
-        <label>
-          Beautiful?
-          <input
-            type="range"
-            defaultValue={beauty}
-            onChange={(e) => setBeauty(+e.target.value)}
-            min={0}
-            max={0.9999999}
-            step={0.01}
-            name="beauty"
-          />
-        </label>
+        <div>
+          <label>
+            Easy to read?
+            <input
+              type="range"
+              defaultValue={easyToRead}
+              onChange={(e) => setEasyToRead(+e.target.value)}
+              min={0}
+              max={0.9999999}
+              step={0.001}
+              name="easyToRead"
+            />
+          </label>
+          <p style={{ textAlign: "end", marginRight: "55px", color: "#aaa" }}>
+            {(easyToRead * 100).toFixed(0)}%
+          </p>
+        </div>
+        <div>
+          <label>
+            Beautiful?
+            <input
+              type="range"
+              defaultValue={beauty}
+              onChange={(e) => setBeauty(+e.target.value)}
+              min={0}
+              max={0.9999999}
+              step={0.001}
+              name="beauty"
+            />
+          </label>
+          <p style={{ textAlign: "end", marginRight: "55px", color: "#aaa" }}>
+            {(beauty * 100).toFixed(0)}%
+          </p>
+        </div>
         <input type="submit" value="Submit" />
       </form>
     </>

@@ -8,7 +8,7 @@ export default function Loading() {
     "The project uses React to create a dynamic and responsive user interface.",
     "The project uses the useEffect hook in React to update the neural network's output in real-time. This allows users to see the neural network's predictions as they change the color combination.",
     "The project's 'Give me something nice'-button generates 1000 random color combinations and selects the one with the highest beauty and accessibility scores.",
-    "The project is designed to help developers create user interfaces that are both visually appealing and accessible to users with different needs and abilities.",
+    "The project is designed to help developers and designers create products that are both visually appealing and accessible to users with different needs and abilities.",
   ];
 
   let randomFact = facts[Math.floor(Math.random() * facts.length)];

@@ -13,7 +13,7 @@ import Loading from "./components/Loading";
 
 const config = {
   binaryThresh: 0.5,
-  hiddenLayers: [6, 6], // array of ints for the sizes of the hidden layers in the network
+  hiddenLayers: [6, 5], // array of ints for the sizes of the hidden layers in the network
   activation: "sigmoid", // supported activation types: ['sigmoid', 'relu', 'leaky-relu', 'tanh'],
   leakyReluAlpha: 0.01, // supported for activation type 'leaky-relu'
 };
@@ -83,19 +83,21 @@ export default function Home() {
     });
   };
   useEffect(() => {
-    trainNeuralNet(setNet, net).then(() => {
-      setIsNetTrained(true);
-    });
+    setTimeout(() => {
+      trainNeuralNet(setNet, net).then(() => {
+        setIsNetTrained(true);
+      });
+    }, 100);
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between p-9">
       {!isNetTrained && <Loading />}
       <Header {...canvasProps} setCanvasProps={setCanvasProps} />
       <div className="relative lg:flex md:flex place-items-center gap-10 m-5">
         <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
           <Canvas {...canvasProps} />
-          <div>
+          <div className="flex justify-center gap-10">
             <button onClick={findAGoodOne}>Give me something nice</button>
             <RandomButton handleRandomize={handleRandomize} />
           </div>
