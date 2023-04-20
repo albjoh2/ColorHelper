@@ -10,7 +10,7 @@ export default function ScoreContainer({
   totalScore: number;
 }) {
   return (
-    <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-3 lg:text-left">
+    <div className="w-full max-w-5xl mb-32 grid text-center lg:mb-0 lg:grid-cols-3 lg:text-left">
       <ScoreComponent
         score={accessibilityScore}
         title="Accessibility Score"

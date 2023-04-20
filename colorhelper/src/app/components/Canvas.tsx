@@ -12,7 +12,7 @@ export default function Canvas(props: CanvasProps) {
       <div
         style={{
           display: "flex",
-          width: "500px",
+          width: "100%",
           height: "300px",
           textAlign: "center",
           justifyContent: "center",

@@ -53,7 +53,7 @@ export default function TrainingForm(props: CanvasProps) {
   };
 
   return (
-    <>
+    <div className="relative w-full h-120 left-0 top-0 justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto lg:rounded-xl lg:border lg:bg-gray-200 rounded-md lg:p-4 lg:dark:bg-zinc-800/30 p-20">
       <form
         style={{
           width: "300px",
@@ -102,6 +102,6 @@ export default function TrainingForm(props: CanvasProps) {
         </div>
         <input type="submit" value="Submit" />
       </form>
-    </>
+    </div>
   );
 }

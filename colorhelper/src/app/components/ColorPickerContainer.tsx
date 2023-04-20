@@ -75,8 +75,8 @@ export default function ColorPickerContainer({
             marginTop: "0",
             padding: "0.6rem 0.2rem",
             width: "70px",
-            color: /^#[0-9a-fA-F]{6}$/.test(hexValue) ? "#000" : "#aaa",
-            borderColor: /^#[0-9a-fA-F]{6}$/.test(hexValue) ? "#000" : "#aaa",
+            color: /^#[0-9a-fA-F]{6}$/.test(hexValue) ? "#888" : "#aaa",
+            borderColor: /^#[0-9a-fA-F]{6}$/.test(hexValue) ? "#888" : "#aaa",
           }}
           className="h-2"
           type="text"

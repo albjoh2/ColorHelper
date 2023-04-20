@@ -6,7 +6,8 @@ export default function TextComponent(props: {
     <p
       style={{
         color: `rgb(${props.textcolor.red}, ${props.textcolor.green}, ${props.textcolor.blue})`,
-        fontSize: "36px",
+        fontSize: "48px",
+        fontFamily: "serif",
       }}
       className="text"
     >

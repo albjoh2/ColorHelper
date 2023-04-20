@@ -54,18 +54,48 @@ export default function Home() {
     });
   };
 
-  const findAGoodOne = () => {
+  const findAGoodOne = (type: string) => {
     let bestScore = 0;
-    let bestColor = {
-      background: { red: 0, green: 0, blue: 0 },
-      text: { red: 0, green: 0, blue: 0 },
-    };
-    let bestText = "";
+    let bestColor;
+    if (type === "text") {
+      bestColor = {
+        background: {
+          red: canvasProps.color.background.red,
+          green: canvasProps.color.background.green,
+          blue: canvasProps.color.background.blue,
+        },
+        text: { red: 0, green: 0, blue: 0 },
+      };
+    } else if (type === "background") {
+      bestColor = {
+        background: { red: 0, green: 0, blue: 0 },
+        text: {
+          red: canvasProps.color.text.red,
+          green: canvasProps.color.text.green,
+          blue: canvasProps.color.text.blue,
+        },
+      };
+    } else {
+      bestColor = {
+        background: { red: 0, green: 0, blue: 0 },
+        text: { red: 0, green: 0, blue: 0 },
+      };
+    }
     for (let i = 0; i < 1000; i++) {
       let color = getRandomColor({
         background: { red: 0, green: 0, blue: 0 },
         text: { red: 0, green: 0, blue: 0 },
       });
+      if (type === "text") {
+        color.background.red = canvasProps.color.background.red;
+        color.background.green = canvasProps.color.background.green;
+        color.background.blue = canvasProps.color.background.blue;
+      }
+      if (type === "background") {
+        color.text.red = canvasProps.color.text.red;
+        color.text.green = canvasProps.color.text.green;
+        color.text.blue = canvasProps.color.text.blue;
+      }
       let data = getNeuralNetOutputs(net, {
         color: color,
         text: canvasProps.text,
@@ -74,12 +104,11 @@ export default function Home() {
       if (score > bestScore) {
         bestScore = score;
         bestColor = color;
-        bestText = canvasProps.text;
       }
     }
     setCanvasProps({
       color: bestColor,
-      text: bestText,
+      text: canvasProps.text,
     });
   };
   useEffect(() => {
@@ -91,20 +120,34 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-9">
+    <main className="flex justify-between min-h-screen flex-col items-center p-7">
       {!isNetTrained && <Loading />}
       <Header {...canvasProps} setCanvasProps={setCanvasProps} />
-      <div className="relative lg:flex md:flex place-items-center gap-10 m-5">
-        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <div className="w-full max-w-5xl relative lg:flex md:flex place-items-center mt-5 gap-20">
+        <div
+          className="h-120"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "10px",
+            width: "100%",
+          }}
+        >
           <Canvas {...canvasProps} />
-          <div className="flex justify-center gap-10">
-            <button onClick={findAGoodOne}>Give me something nice</button>
+          <div className="flex gap-5">
+            <button onClick={() => findAGoodOne("both")}>Something nice</button>
+            <button onClick={() => findAGoodOne("text")}>
+              Nice text color.
+            </button>
+            <button onClick={() => findAGoodOne("background")}>
+              Nice background.
+            </button>
             <RandomButton handleRandomize={handleRandomize} />
           </div>
         </div>
-        <div className="w-full flex justify-center sm:mt-10">
-          <TrainingForm {...canvasProps} />
-        </div>
+
+        <TrainingForm {...canvasProps} />
       </div>
 
       <ScoreContainer

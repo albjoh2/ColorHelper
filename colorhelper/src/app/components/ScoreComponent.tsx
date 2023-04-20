@@ -11,8 +11,10 @@ export default function ScoreComponent({
   description: string;
 }) {
   return (
-    <div className="m-5">
-      <h2 className={`${inter.className} mb-3 text-2xl font-semibold`}>
+    <div className="m-3">
+      <h2
+        className={`${inter.className} mb-3 text-2xl sm:text-xl font-semibold`}
+      >
         {title}{" "}
         <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
           -&gt; {score.toFixed(0)}%

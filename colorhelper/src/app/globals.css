@@ -82,6 +82,7 @@ input[type="text"] {
   border: 1px solid rgb(var(--foreground-rgb));
   color: rgb(var(--foreground-rgb));
   padding: 10px 20px;
+  width: 160px;
   border-radius: 5px;
   cursor: text;
   transition: all 0.2s ease-in-out;
@@ -94,6 +95,7 @@ input[type="submit"] {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: smaller;
   transition: all 0.2s ease-in-out;
 }
 
@@ -109,6 +111,7 @@ button {
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
+  font-size: smaller;
   transition: all 0.2s ease-in-out;
 }
 
