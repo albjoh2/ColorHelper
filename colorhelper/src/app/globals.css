@@ -3,17 +3,10 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
+  --foreground-rgb: #121212;
+  --background-start-rgb: 200, 200, 200;
   --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+  --button-hover: #fff;
 }
 
 body {
@@ -65,7 +58,7 @@ input[type="range"]::-webkit-slider-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: rgb(var(--foreground-rgb));
+  background: var(--foreground-rgb);
   cursor: pointer;
 }
 
@@ -73,51 +66,51 @@ input[type="range"]::-moz-range-thumb {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: rgb(var(--foreground-rgb));
+  background: var(--foreground-rgb);
   cursor: pointer;
 }
 
 input[type="text"] {
   background: transparent;
-  border: 1px solid rgb(var(--foreground-rgb));
-  color: rgb(var(--foreground-rgb));
+  border: 1px solid var(--foreground-rgb);
+  color: var(--foreground-rgb);
   padding: 10px 20px;
   width: 160px;
-  border-radius: 5px;
+  border-radius: 2px;
   cursor: text;
   transition: all 0.2s ease-in-out;
 }
 
 input[type="submit"] {
-  background: transparent;
-  border: 1px solid rgb(var(--foreground-rgb));
+  background: #eee;
   color: rgb(var(--foreground-rgb));
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
   font-size: smaller;
   transition: all 0.2s ease-in-out;
 }
 
 input[type="submit"]:hover {
-  background: rgb(var(--foreground-rgb));
-  color: rgb(var(--background-start-rgb));
+  background: var(--button-hover);
+  color: rgb(var(--foreground-rgb));
 }
 
 button {
-  background: transparent;
-  border: 1px solid rgb(var(--foreground-rgb));
+  background: #eee;
   color: rgb(var(--foreground-rgb));
   padding: 10px 20px;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
   font-size: smaller;
+  border: 1px solid rgba(255, 255, 255, 0.8);
   transition: all 0.2s ease-in-out;
 }
 
 button:hover {
-  background: rgb(var(--foreground-rgb));
-  color: rgb(var(--background-start-rgb));
+  background: var(--button-hover);
+  color: rgb(var(--foreground-rgb));
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.1);
 }
 
 input {

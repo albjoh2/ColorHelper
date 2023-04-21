@@ -42,22 +42,19 @@ export async function trainNeuralNet(setNet: any, net: any): Promise<void> {
   setNet(net);
 }
 
-interface CanvasProps {
-  color: object | any;
-  text: string;
+interface Color {
+  text: object | any;
+  background: object | any;
 }
 
-export function getNeuralNetOutputs(
-  net: any,
-  props: CanvasProps
-): NeuralNetOutputs {
+export function getNeuralNetOutputs(net: any, color: Color): NeuralNetOutputs {
   const output = net.run([
-    props.color.text.red / 255,
-    props.color.text.green / 255,
-    props.color.text.blue / 255,
-    props.color.background.red / 255,
-    props.color.background.green / 255,
-    props.color.background.blue / 255,
+    color.text.red / 255,
+    color.text.green / 255,
+    color.text.blue / 255,
+    color.background.red / 255,
+    color.background.green / 255,
+    color.background.blue / 255,
   ]) as any;
 
   return {

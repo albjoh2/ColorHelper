@@ -3,13 +3,13 @@
 import Canvas from "./components/Canvas";
 import { trainNeuralNet, getNeuralNetOutputs } from "./functions/brain";
 import getRandomColor from "./functions/getRandomColor";
-import RandomButton from "./components/RandomButton";
 import TrainingForm from "./components/TrainingForm";
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ScoreContainer from "./components/ScoreContainer";
 import * as brain from "brain.js";
 import Loading from "./components/Loading";
+import ButtonContainer from "./components/ButtonContainer";
 
 const config = {
   binaryThresh: 0.5,
@@ -36,81 +36,13 @@ export default function Home() {
 
   useEffect(() => {
     if (isNetTrained) {
-      let data = getNeuralNetOutputs(net, canvasProps);
+      let data = getNeuralNetOutputs(net, canvasProps.color);
       setAccessibilityScore(data.accessibilityScore);
       setBeautyScore(data.beautyScore);
       setTotalScore((data.accessibilityScore + data.beautyScore) / 2);
     }
   }, [isNetTrained, canvasProps]);
 
-  const handleRandomize = () => {
-    setCanvasProps({
-      color: getRandomColor({
-        background: { red: 0, green: 0, blue: 0 },
-        text: { red: 0, green: 0, blue: 0 },
-      }),
-      //dont change text
-      text: canvasProps.text,
-    });
-  };
-
-  const findAGoodOne = (type: string) => {
-    let bestScore = 0;
-    let bestColor;
-    if (type === "text") {
-      bestColor = {
-        background: {
-          red: canvasProps.color.background.red,
-          green: canvasProps.color.background.green,
-          blue: canvasProps.color.background.blue,
-        },
-        text: { red: 0, green: 0, blue: 0 },
-      };
-    } else if (type === "background") {
-      bestColor = {
-        background: { red: 0, green: 0, blue: 0 },
-        text: {
-          red: canvasProps.color.text.red,
-          green: canvasProps.color.text.green,
-          blue: canvasProps.color.text.blue,
-        },
-      };
-    } else {
-      bestColor = {
-        background: { red: 0, green: 0, blue: 0 },
-        text: { red: 0, green: 0, blue: 0 },
-      };
-    }
-    for (let i = 0; i < 1000; i++) {
-      let color = getRandomColor({
-        background: { red: 0, green: 0, blue: 0 },
-        text: { red: 0, green: 0, blue: 0 },
-      });
-      if (type === "text") {
-        color.background.red = canvasProps.color.background.red;
-        color.background.green = canvasProps.color.background.green;
-        color.background.blue = canvasProps.color.background.blue;
-      }
-      if (type === "background") {
-        color.text.red = canvasProps.color.text.red;
-        color.text.green = canvasProps.color.text.green;
-        color.text.blue = canvasProps.color.text.blue;
-      }
-      let data = getNeuralNetOutputs(net, {
-        color: color,
-        text: canvasProps.text,
-      });
-      let score = (data.accessibilityScore + data.beautyScore) / 2;
-      if (score > bestScore) {
-        bestScore = score;
-        bestColor = color;
-      }
-    }
-    setCanvasProps({
-      color: bestColor,
-      text: canvasProps.text,
-    });
-  };
   useEffect(() => {
     setTimeout(() => {
       trainNeuralNet(setNet, net).then(() => {
@@ -135,16 +67,11 @@ export default function Home() {
           }}
         >
           <Canvas {...canvasProps} />
-          <div className="flex gap-5">
-            <button onClick={() => findAGoodOne("both")}>Something nice</button>
-            <button onClick={() => findAGoodOne("text")}>
-              Nice text color.
-            </button>
-            <button onClick={() => findAGoodOne("background")}>
-              Nice background.
-            </button>
-            <RandomButton handleRandomize={handleRandomize} />
-          </div>
+          <ButtonContainer
+            net={net}
+            canvasProps={canvasProps}
+            setCanvasProps={setCanvasProps}
+          />
         </div>
 
         <TrainingForm {...canvasProps} />
