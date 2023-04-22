@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 interface CanvasProps {
   color: object | any;
   text: string;
+  shadow: boolean;
 }
 
 export default function ColorPickerContainer({
@@ -85,8 +86,8 @@ export default function ColorPickerContainer({
           onChange={handleTextChange}
         />
       </div>
-      <label>
-        Red
+      <label style={{ width: "200px" }}>
+        <span style={{ width: "90px" }}>Red</span>
         <input
           type="range"
           value={colors.red}
@@ -95,8 +96,8 @@ export default function ColorPickerContainer({
           onChange={(e) => handleRangeChange("red", parseInt(e.target.value))}
         />
       </label>
-      <label>
-        Green
+      <label style={{ width: "200px" }}>
+        <span style={{ width: "90px" }}>Green</span>
         <input
           type="range"
           value={colors.green}
@@ -105,8 +106,8 @@ export default function ColorPickerContainer({
           onChange={(e) => handleRangeChange("green", parseInt(e.target.value))}
         />
       </label>
-      <label>
-        Blue
+      <label style={{ width: "200px" }}>
+        <span style={{ width: "90px" }}>Blue</span>
         <input
           type="range"
           value={colors.blue}

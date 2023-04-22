@@ -42,5 +42,6 @@ export default function findAGoodOne(
   setCanvasProps({
     color: bestColor,
     text: canvasProps.text,
+    shadow: canvasProps.shadow,
   });
 }

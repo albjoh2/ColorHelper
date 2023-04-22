@@ -6,7 +6,8 @@ export default function handleRandomize(setCanvasProps: any, canvasProps: any) {
       background: { red: 0, green: 0, blue: 0 },
       text: { red: 0, green: 0, blue: 0 },
     }),
-    //dont change text
+
+    shadow: canvasProps.shadow,
     text: canvasProps.text,
   });
 }

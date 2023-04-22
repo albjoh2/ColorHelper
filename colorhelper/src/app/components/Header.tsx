@@ -4,11 +4,13 @@ import Logotype from "./Logotype";
 interface CanvasProps {
   color: object | any;
   text: string;
+  shadow: boolean;
 }
 
 interface HeaderProps {
   color: object | any;
   text: string;
+  shadow: boolean;
   setCanvasProps: React.Dispatch<React.SetStateAction<CanvasProps>>;
 }
 
@@ -22,7 +24,7 @@ export default function Header(props: HeaderProps) {
           </h2>
         </div>
         <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-          <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex md:flex">
+          <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex md:flex gap-5">
             <ColorPickerContainer
               title={"Background"}
               colors={props.color.background}
@@ -33,16 +35,29 @@ export default function Header(props: HeaderProps) {
               colors={props.color.text}
               setCanvasProps={props.setCanvasProps}
             />
-          </div>
-          <div className="w-full flex align-middle justify-center">
-            <input
-              type="text"
-              value={props.text}
-              onChange={(event) =>
-                props.setCanvasProps({ ...props, text: event.target.value })
-              }
-              placeholder="Min lilla byrå"
-            />
+            <div className="flex flex-col">
+              <input
+                type="text"
+                value={props.text}
+                onChange={(event) =>
+                  props.setCanvasProps({ ...props, text: event.target.value })
+                }
+                placeholder="Min lilla byrå"
+              />
+              <label style={{ width: "150px" }}>
+                Flat style:
+                <input
+                  type="checkbox"
+                  name="styled"
+                  id="styled"
+                  onChange={() =>
+                    props.shadow
+                      ? props.setCanvasProps({ ...props, shadow: false })
+                      : props.setCanvasProps({ ...props, shadow: true })
+                  }
+                />
+              </label>
+            </div>
           </div>
         </div>
       </div>

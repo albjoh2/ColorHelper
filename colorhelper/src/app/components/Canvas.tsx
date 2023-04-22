@@ -3,10 +3,10 @@ import TextComponent from "./TextComponent";
 interface CanvasProps {
   color: object | any;
   text: string;
+  shadow: boolean;
 }
 
 export default function Canvas(props: CanvasProps) {
-  const text = props.text;
   return (
     <>
       <div
@@ -17,10 +17,36 @@ export default function Canvas(props: CanvasProps) {
           textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
-          backgroundColor: `rgb(${props.color.background.red}, ${props.color.background.green}, ${props.color.background.blue})`,
+          backgroundColor: `rgb(${props.color.background.red}, 
+              ${props.color.background.green}, 
+              ${props.color.background.blue})`,
+          position: "relative",
         }}
       >
-        <TextComponent text={text} textcolor={props.color.text} />
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            textAlign: "center",
+            position: "absolute",
+            width: "100%",
+            height: "100%",
+            background: props.shadow
+              ? "linear-gradient(0deg, #00000011 0%, #77777700 35%, #99999900 65%, #ffffff11 100%)"
+              : "",
+            boxShadow: props.shadow
+              ? `inset 0px 0px 0px 3px rgb(${props.color.text.red}, 
+                ${props.color.text.green}, 
+                ${props.color.text.blue})`
+              : "",
+          }}
+        ></div>
+        <TextComponent
+          text={props.text}
+          textcolor={props.color.text}
+          shadow={props.shadow}
+        />
       </div>
     </>
   );

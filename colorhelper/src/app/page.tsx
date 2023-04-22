@@ -22,6 +22,7 @@ export default function Home() {
       text: { red: 0, green: 0, blue: 0 },
     }),
     text: "Min lilla byrå",
+    shadow: true,
   });
 
   const [isNetTrained, setIsNetTrained] = useState(false);
