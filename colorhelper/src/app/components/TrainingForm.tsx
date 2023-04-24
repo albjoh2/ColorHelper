@@ -29,7 +29,8 @@ export default function TrainingForm(props: CanvasProps) {
     setTextColorBlue(props.color.text.blue);
   }, [props.color]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: any) => {
+    event.preventDefault();
     await fetch("http://127.0.0.1:8090/api/collections/dataPoint/records", {
       method: "POST",
       headers: {
@@ -49,7 +50,7 @@ export default function TrainingForm(props: CanvasProps) {
     setBeauty(0.5);
     setEasyToRead(0.5);
 
-    router.refresh();
+    window.location.reload();
   };
 
   return (
