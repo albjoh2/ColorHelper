@@ -20,9 +20,13 @@ export default function ScoreComponent({
           -&gt; {score.toFixed(0)}%
         </span>
       </h2>
-      <p className={`${inter.className} m-0 max-w-[30ch] text-sm opacity-50`}>
-        {description}
-      </p>
+      <div className="flex justify-center">
+        <p
+          className={`${inter.className} text-center m-0 max-w-[30ch] text-sm opacity-50`}
+        >
+          {description}
+        </p>
+      </div>
     </div>
   );
 }

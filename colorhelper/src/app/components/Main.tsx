@@ -1,6 +1,6 @@
 import Canvas from "./Canvas";
 import ButtonContainer from "./ButtonContainer";
-import TrainingForm from "./TrainingForm";
+// import TrainingForm from "./TrainingForm";
 
 export default function Main({ net, canvasProps, setCanvasProps }: any) {
   return (
@@ -23,7 +23,7 @@ export default function Main({ net, canvasProps, setCanvasProps }: any) {
         />
       </div>
 
-      <TrainingForm {...canvasProps} />
+      {/* <TrainingForm {...canvasProps} /> */}
     </div>
   );
 }

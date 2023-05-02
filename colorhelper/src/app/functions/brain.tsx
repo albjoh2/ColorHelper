@@ -14,12 +14,17 @@ interface NeuralNetOutputs {
   beautyScore: number;
 }
 
-export async function trainNeuralNet(setNet: any, net: any): Promise<void> {
+export async function trainNeuralNet(
+  setNet: any,
+  net: any,
+  data: any
+): Promise<void> {
   // get training data from Pocketbase
-  const response = await fetch(
-    "http://127.0.0.1:8090/api/collections/dataPoint/records?perPage=1000"
-  );
-  const data = await response.json();
+  // const response = await fetch(
+  //   "http://127.0.0.1:8090/api/collections/dataPoint/records?perPage=1000"
+  // );
+
+  // const data = await response.json();
 
   // modify training data to include two outputs
   const trainingData = data.items.map((item: PocketbaseData) => ({

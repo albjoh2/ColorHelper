@@ -9,6 +9,7 @@ import ScoreContainer from "./components/ScoreContainer";
 import * as brain from "brain.js";
 import Loading from "./components/Loading";
 import { CONFIG } from "./constants";
+import * as data from "./data.json";
 
 export default function Home() {
   const [beautyScore, setBeautyScore] = useState(0);
@@ -37,7 +38,7 @@ export default function Home() {
   }, [isNetTrained, canvasProps]);
 
   useEffect(() => {
-    trainNeuralNet(setNet, net).then(() => {
+    trainNeuralNet(setNet, net, data).then(() => {
       setIsNetTrained(true);
     });
   }, []);
