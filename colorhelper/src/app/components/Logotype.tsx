@@ -11,8 +11,8 @@ export default function Logotype() {
       >
         By{" "}
         <Image
-          src="/LogoDark.svg"
-          alt="Vercel Logo"
+          src="/Logotyp_mork.png"
+          alt="Min lilla byrå"
           className="dark:invert"
           width={150}
           height={36}
